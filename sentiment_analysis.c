@@ -5,6 +5,9 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include "sentiment_analysis.h"
+#include <errno.h>
+#include <fcntl.h>
+#include <sys/wait.h>
 
 // create a linked list 
 txt_lst_t *txtList = NULL;
@@ -19,6 +22,7 @@ void addFile(node_t* newFile) {
         // add it to the beginning of list
         txtList->first_txt = newFile;
         txtList->first_txt->next = NULL;
+        txtList->length = 1;
     } 
     else { 
         // again add it to the beginning of the list
@@ -26,6 +30,7 @@ void addFile(node_t* newFile) {
         txtList->first_txt = newFile;
         // the previous first will be the second element
         txtList->first_txt->next = prev_first;
+        txtList->length++;
     }
 }
 
@@ -100,6 +105,36 @@ int main(int argc, char** argv) {
     if (txtList == NULL) {
         printf("There is no readable txt file in this directory\n.");
         exit(2);
+    }
+
+    // array that stores he ids of child proceses 
+    int processIds[txtList->length];
+
+    // id index to store ids above
+    int idIndex = 0;
+
+    // iterate through the linked list calling fork()
+    for (node_t* curTxt = txtList->first_txt; curTxt != NULL; curTxt = curTxt->next) {
+        // create a new process
+        int rc = fork();
+
+        // if this is parent process
+        if (rc < 0) {
+            // fork failed
+            fprintf(stderr, "fork failed\n");
+            exit(1);
+        }
+        else if (rc == 0) { // if this is child process
+            if(execvp("dummy.py", curTxt->txt_name) == -1){
+                printf("execvp error\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+        else {
+            // add the process id of the child to the array
+            processIds[idIndex] = rc;
+            idIndex++;
+        }
     }
 
   return 0;

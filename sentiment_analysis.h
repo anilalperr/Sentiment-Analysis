@@ -9,6 +9,7 @@ typedef struct node {
 // Linked list of txt file
 typedef struct txt_lst {
     node_t *first_txt;
+    int length;
 }txt_lst_t;
 
 void addFile(node_t* newFile);
