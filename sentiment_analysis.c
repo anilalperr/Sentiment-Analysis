@@ -136,14 +136,7 @@ int main(int argc, char** argv) {
             strcat(args, " ");
             strcat(args, curTxt->txt_name);
 
-            free(args);
-
-            char* args[2];
-
-            args[0] = program_name;
-            args[1] = curTxt->txt_name;
-
-            if(execvp("/usr/bin/python", &args) == -1){
+            if(execvp("python", &args) == -1){
                 printf("execvp error\n");
                 exit(EXIT_FAILURE);
             }
