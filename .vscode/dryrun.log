@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/haruko/Desktop/Fall2021/CSC-213/final_project/Sentiment-Analysis'
+clang -g -Wall -Werror -o sentiment_analysis sentiment_analysis.c
+make: Leaving directory `/Users/haruko/Desktop/Fall2021/CSC-213/final_project/Sentiment-Analysis'
+ 

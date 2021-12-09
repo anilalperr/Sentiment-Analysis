@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import re
 import sys
@@ -13,3 +15,6 @@ def main():
     sys.exit("Usage: python dummy.py [txtfilename]")
 
   countWords(sys.argv[1])
+
+if __name__ == "__main__":
+  main()
