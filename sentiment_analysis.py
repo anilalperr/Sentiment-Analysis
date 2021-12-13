@@ -53,11 +53,11 @@ def main():
     #plot the pie chart
     plt.pie(proportions, labels = emotions)
     
-    #show the plot
-    plt.show()
-    
     #print emotion dictionary
     print(emotion_dict)
+
+    #show the pie chart
+    plt.show()
     
 #call the main function
 if __name__ == "__main__":
