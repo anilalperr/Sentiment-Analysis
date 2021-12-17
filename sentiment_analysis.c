@@ -155,14 +155,14 @@ int main(int argc, char **argv) {
         int status;
 
         // wait for the process to terminate
-        pid_t pid = waitpid(processIds[i], &status, 0); 
-        
+        pid_t pid = waitpid(processIds[i], &status, 0);
+
         //error check
         if (pid == -1) {
             printf("waitpid error occured");
             exit(EXIT_FAILURE);
         }
-                
+
      }
 
     return 0;
