@@ -43,6 +43,11 @@ def main():
     
     # get the emotions 
     emotion_dict = te.get_emotion(txt_content)
+
+    # get rid of zeros
+    for k in emotion_dict.copy():
+        if emotion_dict[k] == 0:
+            del emotion_dict[k]
     
     # access the labels
     emotions  = list(emotion_dict.keys())
@@ -51,7 +56,10 @@ def main():
     proportions = list(emotion_dict.values())
     
     #plot the pie chart
-    plt.pie(proportions, labels = emotions)
+    plt.pie(proportions, labels = emotions, autopct='%1.0f%%')
+
+    #write a title for the pie chart
+    plt.title(directory + " Emotion Pie Chart")
     
     #print emotion dictionary
     print(emotion_dict)

@@ -53,7 +53,7 @@ void addTxtFiles(const char *directory_name) {
             }
 
             //Create path of directory
-            char *path = (char *)malloc(sizeof(strlen(directory_name) + strlen(entry->d_name) + 2) * (sizeof(char)));
+            char *path = (char *)malloc((strlen(directory_name) + strlen(entry->d_name) + 2) * (sizeof(char)));
 
             strcpy(path, directory_name);
             strcat(path, "/");
